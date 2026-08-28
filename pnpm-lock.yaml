@@ -1,6 +1,6 @@
 lockfileVersion: '9.0'
 
-settings:
+settings: const [] = React.useState();
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 

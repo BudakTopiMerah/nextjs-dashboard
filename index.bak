@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@latest?dev",
+          "react-dom/client": "https://esm.sh/react-dom@latest/client?dev",
+          "react/jsx-runtime": "https://esm.sh/react@latest/jsx-runtime?dev"
+        }
+      }
+    </script>
+    <!-- Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Declarative React</title>
+    <link rel='stylesheet' href='main.css'>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel" data-type="module" data-preset="react">
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+
+        const domNode = document.getElementById('app');
+
+        function Header({ title }) {
+            console.log(title);
+            return <h1>{title ? title : 'Default title'}</h1>;
+        }
+
+        function HomePage() {
+            const [likes, setLikes] = React.useState(0);
+
+            function handleClick() {
+                setLikes(likes + 1);
+                console.log("increment like count")
+            }
+
+            const names = [
+                'Ada Lovelace',
+                'Grace Hopper',
+                'Margaret Hamilton'
+            ];
+            
+            return (
+                <div>
+                    <Header title="Develop. Preview. Ship." />
+                    <Header title="A new title" />
+                    The Quick Brown Fox Jumps Over the Lazy Dog
+                    <ul>
+                        {names.map((name) => (
+                            <li key={name}>{name}</li>
+                        ))}
+                    </ul>
+                       <button onClick={handleClick}>Like({likes})</button>
+                </div>
+            );
+        }
+
+
+        const root = createRoot(domNode);
+        root.render(<HomePage />);
+    </script>
+</body>
+
+</html>
